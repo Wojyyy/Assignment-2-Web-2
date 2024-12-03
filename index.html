@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <title>F1 Dashboard Project</title>
+  </head>
+  <header>
+    <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
+    <h1 class="headerTitle">F1 Dashboard Project</h1>
+  </header>
+  <body>
+    <main>
+      <!-- Home View -->
+      <article id="home">
+        <div class="main-content">
+          <div class="description c1">
+            <p>
+              This assignment focuses on creating a Formula 1 website that
+              displays detailed information about drivers, circuits,
+              constructors, and races. The website is built using HTML,
+              Javascript, and CSS to provide a functional and well-structured
+              user experience.
+              <br/><br/>
+              Made for COMP3512 Assignment 2 at Mount Royal University.
+              <br/><br/>
+              This project has been made by: <br/>
+              Michal Wojciechowski. <br/><br/>
+              <a href="https://github.com/Wojyyy/Web2-Assignment">Link to GitHub</a>
+            </p>
+
+            <div>
+              <label>Select a Season:</label>
+              <select id="season-select"></select> <br><br>
+              <button id="view-races-button" class="browse-button">View Races</button>
+            </div>
+          </div>
+          <div class="image-placeholder c2">
+            <img
+              src="images/f1wallpaper.jpg"
+              alt="F1 Wallpaper"
+              class="image"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Races View -->
+      <dialog id="races">
+        <h2>Races Details</h2>
+        <button id="close-races-dialog">Close</button>
+        <div id="races-container"></div>
+      </dialog>
+
+      <!-- Circuit View -->
+      <dialog id="circuit">
+        <h2>Circuit Details</h2>
+        <button id="close-circuit-dialog">Close</button>
+        <div id="circuit-container"></div>
+      </dialog>
+
+      <!-- Driver View -->
+      <dialog id="driver">
+        <h2>Driver Details</h2>
+        <button id="close-driver-dialog">Close</button>
+        <div id="driver-container"></div>
+      </dialog>
+
+      <!-- Constructor View -->
+      <dialog id="constructor">
+        <h2>Constructor Details</h2>
+        <button id="close-constructor-dialog">Close</button>
+        <div id="constructor-container"></div>
+      </dialog>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

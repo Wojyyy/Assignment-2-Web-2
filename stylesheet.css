@@ -1,0 +1,270 @@
+header {
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.headerTitle {
+    font-size: 30px;
+    font-weight: 500;
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 20px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 10px auto;
+    max-width: 1300px;
+}
+
+header {
+    max-width: 1300px;
+    margin: 0px auto;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.browse-button {
+    padding: 10px 20px;
+    background-color: rgb(236, 28, 28);
+    color: black;
+    border: 2px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.image-placeholder {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 0px auto;
+}
+
+label {
+    font-weight: 600;
+}
+
+select {
+    font-weight: 600;
+    padding: 5px 20px;
+}
+
+
+
+/*** API Page ***/ 
+
+.apiContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.insideApiContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.outline {
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.descriptionAPI {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.image-placeholderAPI {
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+}
+
+/*** Browse Page ***/ 
+
+.browse-content {
+    display: grid;
+    grid-template-columns: 2fr 3fr 3fr;
+    gap: 20px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+    max-width: 1300px;
+    margin: 10px auto;
+}
+
+.c1 {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start ;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+}
+
+.c2 {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start ;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+}
+
+.c3 {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+}
+
+.secondary {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+th, .thick {
+    font-weight: 600;
+}
+
+hr {
+    color: black;
+    width: 100%;
+    padding: 1px 0px;
+    background-color: black;
+}
+
+.race-item {
+    display: grid;
+    grid-template-columns: 0.75fr 6fr 1fr;
+    align-items: center;
+    padding: 10px 0px; 
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0px;
+}
+
+.race-results a {
+    padding: 5px 10px;
+    background-color: rgb(236, 28, 28);
+    color: black;
+    border: 2px solid gray;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+td {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.podium {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.p1 {
+    padding: 20px;
+    background-color: gold;
+    border: 2px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0px;
+    font-weight: 800;
+}
+
+.p1 a, .p2 a, .p3 a {
+    color: black;
+}
+
+.p2 {
+    padding: 20px;
+    background-color: silver;
+    border: 2px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0px;
+    font-weight: 800;
+}
+
+.p3 {
+    padding: 20px;
+    background-color: #CD7F32;
+    border: 2px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px 0px;
+    font-weight: 800;
+}
+
+a {
+    color: rgb(236, 28, 28);
+}
+
+table {
+    width: 100%;
+}
+
+/*** Driver Page ***/ 
+
+.driver-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    margin-top: 10px;
+    max-width: 1300px;
+    margin: 10px auto;
+}
+
+th {
+    text-align: left;
+}
+
+tr td {
+    padding: 8px 0px; 
+    border-bottom: 1px solid #ccc;
+}
