@@ -35,7 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event listener for closing the races dialog
   closeRacesButton.addEventListener("click", () => {
-    racesDialog.close();
+    const racesDialog = document.getElementById("races");
+    const homePage = document.getElementById("home");
+    racesDialog.style.display = "none";
+    homePage.style.display = "block";
   });
 
   // Function to check localStorage and fetch season data if necessary
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sort races by round https://forum.freecodecamp.org/t/arr-sort-a-b-a-b-explanation/167677
     races.sort((a, b) => a.round - b.round);
 
-    // create rows with data
+    // Create rows with data
     races.forEach((race) => {
         const row = document.createElement("tr");
 
@@ -128,13 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
         resultsButton.classList.add("race-results");
         resultsButton.addEventListener("click", () => { 
           
-          // hide placeholder and display c2 and c3
+          // Hide placeholder and display c2 and c3
             placeholder.style.display = "none"; 
             c2.style.display = "flex";
             c3.style.display = "flex";
 
           
-          loadRaceDetails(race);
+          loadRaceDetails(race); // Populate data in c2 and c3
         });
 
         action.appendChild(resultsButton);
@@ -149,6 +152,72 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Display the dialog
     const racesDialog = document.getElementById("races");
-    racesDialog.showModal();
+    const homePage = document.getElementById("home");
+    racesDialog.style.display = "block";
+    homePage.style.display = "none";
+}
+
+function loadRaceDetails(race) {
+  // Grab it from localStorage instead of fetching again
+  const qualifyingData = JSON.parse(localStorage.getItem(`qualifying_${race.year}`));
+  
+  if (!qualifyingData) {
+    console.error(`No qualifying data found for season ${race.year}`);
+    alert("Qualifying results are unavailable for this race.");
+    return;
+  }
+
+  // Filter qualifying results for this specific race
+  // Lab 10
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+  const raceQualifyingResults = qualifyingData.filter(
+    (result) => result.race.id === race.id 
+  );
+
+  // Populate race details sections in c2
+  document.getElementById("race-name").textContent = race.name;
+  document.getElementById("race-round").textContent = race.round;
+  document.getElementById("circuit-name").textContent = race.circuit.name;
+  document.getElementById("race-location").textContent = race.circuit.location;
+  document.getElementById("race-country").textContent = race.circuit.country;
+  document.getElementById("race-date").textContent = race.date;
+  document.getElementById("race-url").href = race.url;
+
+  // Populate qualifying results in c2
+  const qualifyingResultsTable = document.getElementById("qualifying-results");
+  qualifyingResultsTable.innerHTML = ""; // Clear previous results
+
+  raceQualifyingResults.forEach((result) => {
+    const row = document.createElement("tr");
+
+    const pos = document.createElement("td");
+    pos.textContent = result.position;
+
+    // needs to be able to open driver page
+    const driver = document.createElement("td");
+    driver.textContent = `${result.driver.forename} ${result.driver.surname}`;
+    
+    // needs to be able to open constructor page
+    const constructor = document.createElement("td");
+    constructor.textContent = result.constructor.name;
+    
+    const q1 = document.createElement("td");
+    q1.textContent = result.q1 || "N/A";
+
+    const q2 = document.createElement("td");
+    q2.textContent = result.q2 || "N/A";
+
+    const q3 = document.createElement("td");
+    q3.textContent = result.q3 || "N/A";
+
+    row.appendChild(pos);
+    row.appendChild(driver);
+    row.appendChild(constructor);
+    row.appendChild(q1);
+    row.appendChild(q2);
+    row.appendChild(q3);
+
+    qualifyingResultsTable.appendChild(row);
+  });
 }
 });

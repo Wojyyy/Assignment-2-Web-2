@@ -178,6 +178,10 @@ ul {
     border-radius: 20px;
     background-color: #f8f8f8;
 }
+
+#races {
+    display: none;
+}
  
 
 .secondary {

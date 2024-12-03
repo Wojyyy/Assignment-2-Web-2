@@ -7,13 +7,13 @@
     <title>F1 Dashboard Project</title>
   </head>
   <body>
+    <header>
+        <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+        <h1 class="headerTitle">F1 Dashboard Project</h1>
+      </header>
     <main>
       <!-- Home View -->
       <article id="home">
-        <header>
-          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-          <h1 class="headerTitle">F1 Dashboard Project</h1>
-        </header>
         <div class="main-content">
           <div class="description c1">
             <p>
@@ -27,11 +27,10 @@
               <br /><br />
               This project has been made by: <br />
               Michal Wojciechowski. <br /><br />
-              <a href="https://github.com/Wojyyy/Web2-Assignment"
+              <a href="https://github.com/Wojyyy/Assignment-2-Web-2"
                 >Link to GitHub</a
               >
             </p>
-
             <div>
               <label>Select a Season:</label>
               <select id="season-select"></select>
@@ -52,11 +51,7 @@
       </article>
 
       <!-- Races View -->
-      <dialog id="races">
-        <header>
-          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-          <h1 class="headerTitle">F1 Dashboard Project</h1>
-        </header>
+      <article id="races">
         <div class="browse-content">
           <!-- Column 1 -->
           <div class="c1">
@@ -80,8 +75,6 @@
             <p>Select a race to view details.</p>
           </div>
           
-          
-
           <!-- Column 2 -->
           <div class="c2-races">
             <h3>Race Details</h3>
@@ -158,7 +151,7 @@
           </div>
         </div>
         <button id="close-races-dialog">Close</button>
-      </dialog>
+      </article>
 
       <!-- Circuit View -->
       <dialog id="circuit">
