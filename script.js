@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       getSeasonData(season);
     } else {
       console.log("Display Data from Local Storage");
-      displayRaces(JSON.parse(raceData));
+      displayRaces(JSON.parse(raceData), season);
     }
   }
 
@@ -86,34 +86,56 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem(`qualifying_${season}`, JSON.stringify(qualifyingData));
 
       // Display races (ONLY, FOR NOW)
-      displayRaces(raceData);
+      displayRaces(raceData, season);
     } catch (error) {
       console.error("Error fetching season data", error);
       
-      // for the user
+      // Error display for user
       alert("Failed to load season data. Please try again later.");
     }
   }
 
   // Function to display races data in the dialog
-  function displayRaces(races) {
-    racesContainer.innerHTML = ""; // Clear first
+  function displayRaces(races, season) {
 
+    // Update Heading with the correct year
+    const seasonYearHeading = document.getElementById("season-year");
+    seasonYearHeading.textContent = `${season} Races`;
+
+    const racesContainer = document.getElementById("races-container");
+    racesContainer.innerHTML = ""; // Clear previous rows
+
+    // Sort races by round https://forum.freecodecamp.org/t/arr-sort-a-b-a-b-explanation/167677
+    races.sort((a, b) => a.round - b.round);
+
+    // create rows with data
     races.forEach((race) => {
-      const raceDiv = document.createElement("div");
-      raceDiv.textContent = `${race.round}: ${race.name} (${race.date})`;
+        const row = document.createElement("tr");
 
-      // Add a button for each race to show Driver View
-      const driverButton = document.createElement("button");
-      driverButton.textContent = "View Drivers";
-      driverButton.setAttribute("data-race-id", race.round);
-      driverButton.classList.add("view-driver-btn");
+        const round = document.createElement("td");
+        round.textContent = race.round;
 
-      raceDiv.appendChild(driverButton);
-      racesContainer.appendChild(raceDiv);
+        const name = document.createElement("td");
+        name.textContent = race.name;
+
+        const action = document.createElement("td");
+        const resultsButton = document.createElement("button");
+        resultsButton.textContent = "Results";
+        resultsButton.classList.add("race-results");
+        resultsButton.addEventListener("click", () => loadRaceDetails(race));
+
+        action.appendChild(resultsButton);
+
+        // Append each cells to the each row
+        row.appendChild(round);
+        row.appendChild(name);
+        row.appendChild(action);
+
+        racesContainer.appendChild(row);
     });
 
     // Display the dialog
+    const racesDialog = document.getElementById("races");
     racesDialog.showModal();
-  }
+}
 });
