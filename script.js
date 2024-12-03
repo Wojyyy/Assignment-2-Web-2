@@ -105,6 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const racesContainer = document.getElementById("races-container");
     racesContainer.innerHTML = ""; // Clear previous rows
 
+    const placeholder = document.getElementById("placeholder");
+    const c2 = document.querySelector(".c2-races");
+    const c3 = document.querySelector(".c3-races");
+
     // Sort races by round https://forum.freecodecamp.org/t/arr-sort-a-b-a-b-explanation/167677
     races.sort((a, b) => a.round - b.round);
 
@@ -122,7 +126,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultsButton = document.createElement("button");
         resultsButton.textContent = "Results";
         resultsButton.classList.add("race-results");
-        resultsButton.addEventListener("click", () => loadRaceDetails(race));
+        resultsButton.addEventListener("click", () => { 
+          
+          // hide placeholder and display c2 and c3
+            placeholder.style.display = "none"; 
+            c2.style.display = "flex";
+            c3.style.display = "flex";
+
+          
+          loadRaceDetails(race);
+        });
 
         action.appendChild(resultsButton);
 

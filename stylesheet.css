@@ -155,6 +155,31 @@ ul {
     background-color: #f8f8f8;
 }
 
+.c3-placeholder {
+    display: block;
+}
+
+.c2-races {
+    display: none;
+    flex-direction: column;
+    justify-content:flex-start ;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+}
+
+.c3-races {
+    display: none;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+}
+ 
+
 .secondary {
     font-weight: 300;
     font-size: 14px;

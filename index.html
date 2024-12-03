@@ -11,9 +11,9 @@
       <!-- Home View -->
       <article id="home">
         <header>
-            <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
-            <h1 class="headerTitle">F1 Dashboard Project</h1>
-          </header>
+          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+          <h1 class="headerTitle">F1 Dashboard Project</h1>
+        </header>
         <div class="main-content">
           <div class="description c1">
             <p>
@@ -22,18 +22,23 @@
               constructors, and races. The website is built using HTML,
               Javascript, and CSS to provide a functional and well-structured
               user experience.
-              <br/><br/>
+              <br /><br />
               Made for COMP3512 Assignment 2 at Mount Royal University.
-              <br/><br/>
-              This project has been made by: <br/>
-              Michal Wojciechowski. <br/><br/>
-              <a href="https://github.com/Wojyyy/Web2-Assignment">Link to GitHub</a>
+              <br /><br />
+              This project has been made by: <br />
+              Michal Wojciechowski. <br /><br />
+              <a href="https://github.com/Wojyyy/Web2-Assignment"
+                >Link to GitHub</a
+              >
             </p>
 
             <div>
               <label>Select a Season:</label>
-              <select id="season-select"></select> <br><br>
-              <button id="view-races-button" class="browse-button">View Races</button>
+              <select id="season-select"></select>
+              <br /><br />
+              <button id="view-races-button" class="browse-button">
+                View Races
+              </button>
             </div>
           </div>
           <div class="image-placeholder c2">
@@ -49,112 +54,118 @@
       <!-- Races View -->
       <dialog id="races">
         <header>
-            <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
-            <h1 class="headerTitle">F1 Dashboard Project</h1>
-          </header>
+          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+          <h1 class="headerTitle">F1 Dashboard Project</h1>
+        </header>
         <div class="browse-content">
-            <!-- Column 1 -->
-            <div class="c1">
-                <h2 id="season-year"></h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rnd</th>
-                            <th>Name</th>
-                            <th></th> <!-- needed for the results button -->
-                        </tr>
-                    </thead>
-                    <tbody id="races-container"> <!-- This is being dynamically populated -->
-                    </tbody>
-                </table>
-            </div>
-            
+          <!-- Column 1 -->
+          <div class="c1">
+            <h2 id="season-year"></h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Rnd</th>
+                  <th>Name</th>
+                  <th></th>
+                  <!-- needed for the results button -->
+                </tr>
+              </thead>
+              <tbody id="races-container">
+                <!-- This is being dynamically populated -->
+              </tbody>
+            </table>
+          </div>
 
-            <!-- Column 2 -->
-            <div class="c2">
-                <h3>Race Details</h3>
-                <table>
-                    <tr>
-                        <td class="thick">Race Name:</td>
-                        <td id="race-name"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">Round Number:</td>
-                        <td id="race-round"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">Circuit Name:</td>
-                        <td id="circuit-name"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">Location:</td>
-                        <td id="race-location"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">Country:</td>
-                        <td id="race-country"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">Date:</td>
-                        <td id="race-date"></td>
-                    </tr>
-                    <tr>
-                        <td class="thick">More Info:</td>
-                        <td><a href="#" id="race-url" target="_blank">View Race</a></td>
-                    </tr>
-                </table>
-                <hr>
-                <h3>Qualifying Results</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pos</th>
-                            <th>Driver</th>
-                            <th>Constructor</th>
-                            <th>Q1</th>
-                            <th>Q2</th>
-                            <th>Q3</th>
-                        </tr>
-                    </thead>
-                    <tbody id="qualifying-results">
-                        <!-- Qualifying results will be dynamically populated here -->
-                    </tbody>
-                </table>
-            </div>
+          <div class="c2 c3-placeholder" id="placeholder">
+            <p>Select a race to view details.</p>
+          </div>
+          
+          
 
-            <!-- Column 3 -->
-            <div class="c3">
-                <h3>Race Results</h3>
-                <div class="podium" id="podium">
-                    <!-- Podium positions will be dynamically populated here -->
-                </div>
-                <hr>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pos</th>
-                            <th>Driver</th>
-                            <th>Constructor</th>
-                            <th>Laps</th>
-                            <th>Points</th>
-                        </tr>
-                    </thead>
-                    <tbody id="race-results">
-                        <!-- Race results will be dynamically populated here -->
-                    </tbody>
-                </table>
+          <!-- Column 2 -->
+          <div class="c2-races">
+            <h3>Race Details</h3>
+            <table>
+              <tr>
+                <td class="thick">Race Name:</td>
+                <td id="race-name"></td>
+              </tr>
+              <tr>
+                <td class="thick">Round Number:</td>
+                <td id="race-round"></td>
+              </tr>
+              <tr>
+                <td class="thick">Circuit Name:</td>
+                <td id="circuit-name"></td>
+              </tr>
+              <tr>
+                <td class="thick">Location:</td>
+                <td id="race-location"></td>
+              </tr>
+              <tr>
+                <td class="thick">Country:</td>
+                <td id="race-country"></td>
+              </tr>
+              <tr>
+                <td class="thick">Date:</td>
+                <td id="race-date"></td>
+              </tr>
+              <tr>
+                <td class="thick">More Info:</td>
+                <td><a href="#" id="race-url" target="_blank">View Race</a></td>
+              </tr>
+            </table>
+            <hr />
+            <h3>Qualifying Results</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Driver</th>
+                  <th>Constructor</th>
+                  <th>Q1</th>
+                  <th>Q2</th>
+                  <th>Q3</th>
+                </tr>
+              </thead>
+              <tbody id="qualifying-results">
+                <!-- Qualifying results will be dynamically populated here -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Column 3 -->
+          <div class="c3-races">
+            <h3>Race Results</h3>
+            <div class="podium" id="podium">
+              <!-- Podium positions will be dynamically populated here -->
             </div>
+            <hr />
+            <table>
+              <thead>
+                <tr>
+                  <th>Pos</th>
+                  <th>Driver</th>
+                  <th>Constructor</th>
+                  <th>Laps</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody id="race-results">
+                <!-- Race results will be dynamically populated here -->
+              </tbody>
+            </table>
+          </div>
         </div>
         <button id="close-races-dialog">Close</button>
-
       </dialog>
 
       <!-- Circuit View -->
       <dialog id="circuit">
         <header>
-            <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
-            <h1 class="headerTitle">F1 Dashboard Project</h1>
-          </header>
+          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+          <h1 class="headerTitle">F1 Dashboard Project</h1>
+        </header>
         <h2>Circuit Details</h2>
         <button id="close-circuit-dialog">Close</button>
         <div id="circuit-container"></div>
@@ -163,9 +174,9 @@
       <!-- Driver View -->
       <dialog id="driver">
         <header>
-            <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
-            <h1 class="headerTitle">F1 Dashboard Project</h1>
-          </header>
+          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+          <h1 class="headerTitle">F1 Dashboard Project</h1>
+        </header>
         <h2>Driver Details</h2>
         <button id="close-driver-dialog">Close</button>
         <div id="driver-container"></div>
@@ -174,9 +185,9 @@
       <!-- Constructor View -->
       <dialog id="constructor">
         <header>
-            <img style="max-height: 40px; margin: 10px;" src="images/F1.svg.png" />
-            <h1 class="headerTitle">F1 Dashboard Project</h1>
-          </header>
+          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
+          <h1 class="headerTitle">F1 Dashboard Project</h1>
+        </header>
         <h2>Constructor Details</h2>
         <button id="close-constructor-dialog">Close</button>
         <div id="constructor-container"></div>
