@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Display races (ONLY, FOR NOW)
       displayRaces(raceData);
     } catch (error) {
-      console.error("Error fetching season data:", error);
+      console.error("Error fetching season data", error);
       
       // for the user
       alert("Failed to load season data. Please try again later.");
