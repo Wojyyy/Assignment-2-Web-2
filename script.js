@@ -3,12 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const racesDialog = document.getElementById("races");
   const homePage = document.getElementById("home");
 
-  // Divs
-  const racesContainer = document.getElementById("races-container");
-
   // Buttons
   const viewRacesButton = document.getElementById("view-races-button");
-  const closeRacesButton = document.getElementById("close-races-dialog");
   const logo = document.getElementById("logo");
 
   // Selects
