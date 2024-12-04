@@ -297,3 +297,37 @@ tr td {
     padding: 8px 0px; 
     border-bottom: 1px solid #ccc;
 }
+
+/*** constructor dialog ***/
+.table-container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    max-height: 400px;
+}
+
+.table-container thead th {
+    border-bottom: 2px solid #ccc;
+    text-align: center;
+}
+
+.scrollable-tbody {
+    overflow-y: auto;
+}
+
+.scrollable-tbody td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#close-constructor-dialog {
+    justify-content: center;
+    width: 100%;
+}

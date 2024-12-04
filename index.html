@@ -8,9 +8,13 @@
   </head>
   <body>
     <header>
-        <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-        <h1 class="headerTitle">F1 Dashboard Project</h1>
-      </header>
+      <img
+        id="logo"
+        style="max-height: 40px; margin: 10px"
+        src="images/F1.svg.png"
+      />
+      <h1 class="headerTitle">F1 Dashboard Project</h1>
+    </header>
     <main>
       <!-- Home View -->
       <article id="home">
@@ -74,7 +78,7 @@
           <div class="c2 c3-placeholder" id="placeholder">
             <p>Select a race to view details.</p>
           </div>
-          
+
           <!-- Column 2 -->
           <div class="c2-races">
             <h3>Race Details</h3>
@@ -150,7 +154,6 @@
             </table>
           </div>
         </div>
-        <button id="close-races-dialog">Close</button>
       </article>
 
       <!-- Circuit View -->
@@ -177,13 +180,52 @@
 
       <!-- Constructor View -->
       <dialog id="constructor">
-        <header>
-          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-          <h1 class="headerTitle">F1 Dashboard Project</h1>
-        </header>
-        <h2>Constructor Details</h2>
-        <button id="close-constructor-dialog">Close</button>
-        <div id="constructor-container"></div>
+        <div class="driver-content">
+          <div class="c1">
+            <h2>Race Results</h2>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Round</th>
+                    <th>Circuit</th>
+                    <th>Driver</th>
+                    <th>Pos</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scrollable-tbody">
+                <table>
+                  <tbody id="constructor-race-results">
+                    <!-- Results will be dynamically populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="c2">
+            <h1 id="constructor-name"></h1>
+            <p>
+              <strong>Constructor Nationality:</strong>
+              <span id="constructor-nationality"></span>
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a href="#" target="_blank" id="constructor-url"></a>
+            </p>
+            <p>
+              <strong>Total Points:</strong>
+              <span id="constructor-total-points"></span>
+            </p>
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button id="close-constructor-dialog" class="browse-button">
+            Close
+          </button>
+        </div>
       </dialog>
     </main>
 
