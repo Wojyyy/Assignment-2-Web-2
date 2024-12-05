@@ -352,6 +352,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Sorting c2 and c3 content 
+  function tableSorting(theadId, tbodyId) {
+    const thead = document.getElementById(theadId);
+    const tbody = document.getElementById(tbodyId);
+
+    // make sure that the head and body are there
+    if (!thead || !tbody) {
+      console.error(`Table head or body not found: ${theadId}, ${tbodyId}`);
+      return;
+    }
+
+    const headers = thead.querySelectorAll("th");
+
+    // https://www.w3schools.com/howto/howto_js_sort_table.asp
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+    // https://www.codewithfaraz.com/content/22/how-to-sort-html-table-by-header-click-sorting-data-tables
+    headers.forEach((header, index) => {
+      header.addEventListener("click", () => {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+
+        const ascending = header.dataset.sortOrder !== "asc";
+        header.dataset.sortOrder = ascending ? "asc" : "desc";
+
+        rows.sort((rowA, rowB) => {
+          const cellA = rowA.children[index].textContent.trim();
+          const cellB = rowB.children[index].textContent.trim();
+
+          // check if theyre numbers first
+          if (!isNaN(cellA) && !isNaN(cellB)) {
+            return ascending ? cellA - cellB : cellB - cellA;
+          } else {
+            return ascending
+              ? cellA.localeCompare(cellB)
+              : cellB.localeCompare(cellA);
+          }
+        });
+
+        rows.forEach((row) => tbody.appendChild(row));
+      });
+    });
+  }
+  // Call function to sort c2 or c3
+  tableSorting("qualifying-body", "qualifying-results");
+  tableSorting("race-body", "race-results");
+
   // Function for displaying constructor dialog from pressing on constructor button
   async function openConstructorDialog(constructor) {
     try {
@@ -361,7 +406,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Fetch constructor results (this is not stored in local storage)
       const constructorResultsUrl = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/constructorResults.php?constructor=${constructorRef}&season=${season}`;
-      const constructorResults = await fetchConstructorResults(constructorResultsUrl);
+      const constructorResults = await fetchConstructorResults(
+        constructorResultsUrl
+      );
 
       // Get season results from local storage
       const seasonResults = JSON.parse(
@@ -380,7 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Calculate total points for the constructor from this season
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce?utm_source=chatgpt.com
-      const totalPoints = filteredResults.reduce((sum, result) => sum + (result.points || 0),0);
+      const totalPoints = filteredResults.reduce(
+        (sum, result) => sum + (result.points || 0),
+        0
+      );
 
       populateConstructorDetails(constructor, totalPoints);
       populateRaceResultsTable(constructorResults, seasonResults);
@@ -388,7 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const constructorDialog = document.getElementById("constructor");
       constructorDialog.showModal();
 
-      // Constructors dialog close button 
+      // Constructors dialog close button
       document
         .getElementById("close-constructor-dialog")
         .addEventListener("click", () => {
@@ -411,15 +461,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // Populate constructor details in the dialog
   function populateConstructorDetails(constructor, totalPoints) {
     document.getElementById("constructor-name").textContent = constructor.name;
-    document.getElementById("constructor-nationality").textContent = constructor.nationality;
-    document.getElementById("constructor-url").href = `https://en.wikipedia.org/wiki/${constructor.name}`;
+    document.getElementById("constructor-nationality").textContent =
+      constructor.nationality;
+    document.getElementById(
+      "constructor-url"
+    ).href = `https://en.wikipedia.org/wiki/${constructor.name}`;
     document.getElementById("constructor-url").textContent = constructor.name;
-    document.getElementById("constructor-total-points").textContent = totalPoints;
+    document.getElementById("constructor-total-points").textContent =
+      totalPoints;
   }
 
   // Populate race results table in the dialog
   function populateRaceResultsTable(constructorResults, seasonResults) {
-    const raceResultsTable = document.getElementById("constructor-race-results");
+    const raceResultsTable = document.getElementById(
+      "constructor-race-results"
+    );
     raceResultsTable.innerHTML = "";
 
     constructorResults.forEach((result) => {
@@ -438,7 +494,9 @@ document.addEventListener("DOMContentLoaded", () => {
       positionCell.textContent = result.positionOrder || "N/A";
 
       // Find matching points from seasonResults
-      const matchingSeasonResult = seasonResults.find((seasonResult) => seasonResult.id === result.resultId);
+      const matchingSeasonResult = seasonResults.find(
+        (seasonResult) => seasonResult.id === result.resultId
+      );
 
       const pointsCell = document.createElement("td");
       if (matchingSeasonResult) {
@@ -446,7 +504,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         pointsCell.textContent = "N/A";
       }
-      
+
       row.appendChild(roundCell);
       row.appendChild(circuitCell);
       row.appendChild(driverCell);

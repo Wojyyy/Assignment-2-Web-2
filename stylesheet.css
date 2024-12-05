@@ -332,6 +332,6 @@ tr td {
     width: 100%;
 }
 
-#logo {
+#race-body, #qualifying-body, #logo{
     cursor: pointer;
 }
