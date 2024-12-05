@@ -331,3 +331,7 @@ tr td {
     justify-content: center;
     width: 100%;
 }
+
+#logo {
+    cursor: pointer;
+}
