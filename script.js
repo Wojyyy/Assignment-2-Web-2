@@ -44,8 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const resultData = localStorage.getItem(`results_${season}`);
     const qualifyingData = localStorage.getItem(`qualifying_${season}`);
     const constructorsData = localStorage.getItem(`constructors_${season}`);
+    const driversData = localStorage.getItem(`drivers_${season}`);
 
-    if (!raceData || !resultData || !qualifyingData || !constructorsData) {
+    if (
+      !raceData ||
+      !resultData ||
+      !qualifyingData ||
+      !constructorsData ||
+      !driversData
+    ) {
       console.log("Fetching Data");
       getSeasonData(season);
     } else {
@@ -61,35 +68,45 @@ document.addEventListener("DOMContentLoaded", () => {
       const resultsURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/results.php?season=${season}`;
       const qualifyingURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/qualifying.php?season=${season}`;
       const constructorsURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/constructors.php`;
+      const driversURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/drivers.php`;
 
       const [
         raceResponse,
         resultsResponse,
         qualifyingResponse,
         constructorsResponse,
+        driversResponse,
       ] = await Promise.all([
         fetch(raceURL),
         fetch(resultsURL),
         fetch(qualifyingURL),
         fetch(constructorsURL),
+        fetch(driversURL),
       ]);
 
       if (
         !raceResponse.ok ||
         !resultsResponse.ok ||
         !qualifyingResponse.ok ||
-        !constructorsResponse.ok
+        !constructorsResponse.ok ||
+        !driversResponse.ok
       ) {
         throw new Error("Failed to fetch some data.");
       }
 
-      const [raceData, resultData, qualifyingData, constructorsData] =
-        await Promise.all([
-          raceResponse.json(),
-          resultsResponse.json(),
-          qualifyingResponse.json(),
-          constructorsResponse.json(),
-        ]);
+      const [
+        raceData,
+        resultData,
+        qualifyingData,
+        constructorsData,
+        driversData,
+      ] = await Promise.all([
+        raceResponse.json(),
+        resultsResponse.json(),
+        qualifyingResponse.json(),
+        constructorsResponse.json(),
+        driversResponse.json(),
+      ]);
 
       // Save the data in localStorage
       localStorage.setItem(`races_${season}`, JSON.stringify(raceData));
@@ -102,6 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `constructors_${season}`,
         JSON.stringify(constructorsData)
       );
+      localStorage.setItem(`drivers_${season}`, JSON.stringify(driversData));
 
       displayRaces(raceData, season);
     } catch (error) {
@@ -124,6 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const placeholder = document.getElementById("placeholder");
     const c2 = document.querySelector(".c2-races");
     const c3 = document.querySelector(".c3-races");
+
+    // below makes sure that opening race page the placeholder is visible and not the races
+    placeholder.style.display = "block"; 
+    c2.style.display = "none";
+    c3.style.display = "none";  
 
     // Sort races by round https://forum.freecodecamp.org/t/arr-sort-a-b-a-b-explanation/167677
     races.sort((a, b) => a.round - b.round);
@@ -352,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Sorting c2 and c3 content 
+  // Sorting c2 and c3 content
   function tableSorting(theadId, tbodyId) {
     const thead = document.getElementById(theadId);
     const tbody = document.getElementById(tbodyId);
@@ -396,6 +419,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Call function to sort c2 or c3
   tableSorting("qualifying-body", "qualifying-results");
   tableSorting("race-body", "race-results");
+
+  //********** Constructor Dialog Code **********//
 
   // Function for displaying constructor dialog from pressing on constructor button
   async function openConstructorDialog(constructor) {
@@ -445,7 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
           constructorDialog.close();
         });
     } catch (error) {
-      console.error("Error opening constructor dialog:", error);
+      console.error("Error closing constructor dialog:", error);
     }
   }
 
@@ -515,6 +540,109 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //********** Driver Dialog Code **********//
+
   // function for displaying driver dialog
-  function openDriverDialog(driver) {}
+  async function openDriverDialog(driver) {
+    try {
+      const season = seasonSelect.value;
+
+      const driverResultsUrl = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/driverResults.php?driver=${driver.ref}&season=${season}`;
+      const driverResults = await fetchDriverResults(driverResultsUrl);
+
+      const seasonResults = JSON.parse(
+        localStorage.getItem(`results_${season}`)
+      );
+      if (!seasonResults) {
+        throw new Error(
+          "Season results not found in local storage. Please select a season again."
+        );
+      }
+
+      populateDriverDetails(driver);
+      populateDriverRaceResultsTable(driverResults, seasonResults);
+
+      const driverDialog = document.getElementById("driver");
+      driverDialog.showModal();
+
+      document
+        .getElementById("close-driver-dialog")
+        .addEventListener("click", () => {
+          driverDialog.close();
+        });
+    } catch (error) {
+      console.error("Error opening driver dialog:", error);
+    }
+  }
+
+  // Fetch driver results
+  async function fetchDriverResults(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  }
+
+  // Function to populate driver details in the dialog
+  function populateDriverDetails(driver) {
+    const season = seasonSelect.value;
+    const driversData = JSON.parse(localStorage.getItem(`drivers_${season}`)); // get all drivers from this season
+
+    const matchingDriver = driversData.find((d) => d.driverRef === driver.ref); // matchi our 'driver' reference with this season all drivers to get necessary data
+
+    // Populate driver details in the dialog
+    document.getElementById(
+      "driver-name"
+    ).textContent = `${matchingDriver.forename} ${matchingDriver.surname}`;
+    document.getElementById("driver-number").textContent =
+      matchingDriver.number;
+    document.getElementById("driver-code").textContent = matchingDriver.code;
+    document.getElementById("driver-nationality").textContent =
+      matchingDriver.nationality;
+    document.getElementById("driver-dob").textContent = matchingDriver.dob;
+    document.getElementById("driver-url").href = matchingDriver.url;
+    document.getElementById("driver-url").textContent = matchingDriver.url;
+  }
+
+  // Function to populate driver race results from this season in table in the dialog
+  function populateDriverRaceResultsTable(driverResults, seasonResults) {
+    const season = seasonSelect.value;
+    const racesData = JSON.parse(localStorage.getItem(`races_${season}`));
+
+    const raceResultsTable = document.getElementById("driver-race-results");
+    raceResultsTable.innerHTML = "";
+
+    // compare results to get position and points data
+    driverResults.forEach((result) => {
+      const race = racesData.find((race) => race.round === result.round);
+
+      const matchingSeasonResult = seasonResults.find(
+        (seasonResult) =>
+          seasonResult.race.round === result.round &&
+          seasonResult.driver.ref === result.driverRef
+      );
+
+      const row = document.createElement("tr");
+
+      const roundCell = document.createElement("td");
+      roundCell.textContent = result.round;
+
+      const circuitCell = document.createElement("td");
+      circuitCell.textContent = race.name;
+
+      const positionCell = document.createElement("td");
+      positionCell.textContent = matchingSeasonResult.position;
+
+      const pointsCell = document.createElement("td");
+      pointsCell.textContent = matchingSeasonResult.points;
+
+      row.appendChild(roundCell);
+      row.appendChild(circuitCell);
+      row.appendChild(positionCell);
+      row.appendChild(pointsCell);
+
+      raceResultsTable.appendChild(row);
+    });
+  }
 });

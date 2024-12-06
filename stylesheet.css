@@ -298,7 +298,7 @@ tr td {
     border-bottom: 1px solid #ccc;
 }
 
-/*** constructor dialog ***/
+/*** dialogs ***/
 .table-container {
     display: flex;
     flex-direction: column;
@@ -308,7 +308,7 @@ tr td {
 
 .table-container thead th {
     border-bottom: 2px solid #ccc;
-    text-align: center;
+    text-align: left;
 }
 
 .scrollable-tbody {
@@ -327,11 +327,19 @@ tr td {
     width: 100%;
 }
 
-#close-constructor-dialog {
+.table-container {
+    width: 100%;
+}
+
+#close-constructor-dialog, #close-driver-dialog {
     justify-content: center;
     width: 100%;
 }
 
 #race-body, #qualifying-body, #logo{
     cursor: pointer;
+}
+
+dialog {
+    max-width: 1000px;
 }

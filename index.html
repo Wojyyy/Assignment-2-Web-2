@@ -169,13 +169,49 @@
 
       <!-- Driver View -->
       <dialog id="driver">
-        <header>
-          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-          <h1 class="headerTitle">F1 Dashboard Project</h1>
-        </header>
-        <h2>Driver Details</h2>
-        <button id="close-driver-dialog">Close</button>
-        <div id="driver-container"></div>
+        <div class="driver-content">
+        <div class="c1">
+          <h2>Race Results</h2>
+          <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Round</th>
+                <th>Circuit</th>
+                <th>Position</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            </table>
+            <div class="scrollable-tbody">
+              <table>
+            <tbody id="driver-race-results">
+              <!-- Results will be dynamically populated here -->
+            </tbody>
+          </table>
+        </div>
+        </div>
+        </div>
+
+        <div class="c2">
+          <h1 id="driver-name"></h1>
+          <p><strong>Driver Number:</strong> <span id="driver-number"></span></p>
+          <p><strong>Code:</strong> <span id="driver-code"></span></p>
+          <p>
+            <strong>Nationality:</strong> <span id="driver-nationality"></span>
+          </p>
+          <p><strong>Date of Birth:</strong> <span id="driver-dob"></span></p>
+          <p>
+            <strong>URL:</strong>
+            <a id="driver-url" href="#" target="_blank"></a>
+          </p>
+      </div>
+      </div>
+      <div class="dialog-footer">
+        <button id="close-driver-dialog" class="browse-button">
+          Close
+        </button>
+      </div>
       </dialog>
 
       <!-- Constructor View -->
