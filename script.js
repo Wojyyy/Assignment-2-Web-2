@@ -439,6 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
   
+        // https://www.w3schools.com/charsets/ref_utf_arrows.asp
         sortIndicator.textContent = ascending ? "▲" : "▼";
   
         rows.forEach((row) => tbody.appendChild(row));
