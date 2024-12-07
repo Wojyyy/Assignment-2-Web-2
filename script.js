@@ -319,27 +319,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
     raceResults.slice(0, 3).forEach((result, index) => {
       const podiumPosition = document.createElement("div");
+      const title = document.createElement("strong");
+      const driverLink = document.createElement("a");
 
-      // Same styling as in A1 for the podium
       if (index === 0) {
-        podiumPosition.classList.add("p1"); // 1st place
-        podiumPosition.innerHTML = `
-        <strong>Winner:</strong><br>
-        ${result.driver.forename} ${result.driver.surname} (${result.constructor.name})
-      `;
+        podiumPosition.classList.add("p1");
+        title.textContent = "Winner:";
       } else if (index === 1) {
-        podiumPosition.classList.add("p2"); // 2nd place
-        podiumPosition.innerHTML = `
-        <strong>Second:</strong><br>
-        ${result.driver.forename} ${result.driver.surname} (${result.constructor.name})
-      `;
+        podiumPosition.classList.add("p2");
+        title.textContent = "Second:";
       } else if (index === 2) {
-        podiumPosition.classList.add("p3"); // 3rd place
-        podiumPosition.innerHTML = `
-        <strong>Third:</strong><br>
-        ${result.driver.forename} ${result.driver.surname} (${result.constructor.name})
-      `;
+        podiumPosition.classList.add("p3");
+        title.textContent = "Third:";
       }
+
+      driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      driverLink.href = "#";
+      driverLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        openDriverDialog(result.driver);
+      });
+
+      podiumPosition.appendChild(title);
+      podiumPosition.appendChild(document.createElement("br"));
+      podiumPosition.appendChild(driverLink);
 
       podiumDiv.appendChild(podiumPosition);
     });
@@ -391,29 +394,41 @@ document.addEventListener("DOMContentLoaded", () => {
   function tableSorting(theadId, tbodyId) {
     const thead = document.getElementById(theadId);
     const tbody = document.getElementById(tbodyId);
-
+  
     // make sure that the head and body are there
     if (!thead || !tbody) {
       console.error(`Table head or body not found: ${theadId}, ${tbodyId}`);
       return;
     }
-
+  
     const headers = thead.querySelectorAll("th");
-
+  
     // https://www.w3schools.com/howto/howto_js_sort_table.asp
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
     // https://www.codewithfaraz.com/content/22/how-to-sort-html-table-by-header-click-sorting-data-tables
     headers.forEach((header, index) => {
+      if (!header.querySelector(".sort-indicator")) {
+        const sortIndicator = document.createElement("span");
+        sortIndicator.classList.add("sort-indicator");
+        sortIndicator.style.marginLeft = "5px";
+        header.appendChild(sortIndicator);
+      }
+  
       header.addEventListener("click", () => {
         const rows = Array.from(tbody.querySelectorAll("tr"));
-
+        const sortIndicator = header.querySelector(".sort-indicator");
+  
+        thead.querySelectorAll(".sort-indicator").forEach((span) => {
+          span.textContent = "";
+        });
+  
         const ascending = header.dataset.sortOrder !== "asc";
         header.dataset.sortOrder = ascending ? "asc" : "desc";
-
+  
         rows.sort((rowA, rowB) => {
           const cellA = rowA.children[index].textContent.trim();
           const cellB = rowB.children[index].textContent.trim();
-
+  
           // check if theyre numbers first
           if (!isNaN(cellA) && !isNaN(cellB)) {
             return ascending ? cellA - cellB : cellB - cellA;
@@ -423,11 +438,14 @@ document.addEventListener("DOMContentLoaded", () => {
               : cellB.localeCompare(cellA);
           }
         });
-
+  
+        sortIndicator.textContent = ascending ? "▲" : "▼";
+  
         rows.forEach((row) => tbody.appendChild(row));
       });
     });
   }
+  
   // Call function to sort c2 or c3
   tableSorting("qualifying-body", "qualifying-results");
   tableSorting("race-body", "race-results");

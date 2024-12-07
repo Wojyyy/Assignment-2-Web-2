@@ -23,11 +23,11 @@ header {
     border-radius: 25px;
     padding: 20px;
     margin: 10px auto;
-    max-width: 1300px;
+    max-width: 1600px;
 }
 
 header {
-    max-width: 1300px;
+    max-width: 1600px;
     margin: 0px auto;
 }
 
@@ -121,7 +121,7 @@ ul {
     border-radius: 25px;
     padding: 20px;
     margin-top: 10px;
-    max-width: 1300px;
+    max-width: 1600px;
     margin: 10px auto;
 }
 
@@ -285,7 +285,7 @@ table {
     border-radius: 25px;
     padding: 20px;
     margin-top: 10px;
-    max-width: 1300px;
+    max-width: 1600px;
     margin: 10px auto;
 }
 
@@ -344,6 +344,12 @@ dialog {
     max-width: 1000px;
 }
 
+.sort-indicator {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 12px;
+    color: gray;
+  }  
 
 /*** loading wheel css | found on this website https://loading.io/css/ and slightly modified for this website ***/
 

@@ -17,7 +17,7 @@
     </header>
 
     <div class="lds-dual-ring"></div>
-    
+
     <main>
       <!-- Home View -->
       <article id="home">
@@ -144,13 +144,14 @@
             <table>
               <thead id="race-body">
                 <tr>
-                  <th>Pos</th>
-                  <th>Driver</th>
-                  <th>Constructor</th>
-                  <th>Laps</th>
-                  <th>Points</th>
+                  <th>Pos <span class="sort-indicator"></span></th>
+                  <th>Driver <span class="sort-indicator"></span></th>
+                  <th>Constructor <span class="sort-indicator"></span></th>
+                  <th>Laps <span class="sort-indicator"></span></th>
+                  <th>Points <span class="sort-indicator"></span></th>
                 </tr>
               </thead>
+
               <tbody id="race-results">
                 <!-- Race results will be dynamically populated here -->
               </tbody>
@@ -190,48 +191,49 @@
       <!-- Driver View -->
       <dialog id="driver">
         <div class="driver-content">
-        <div class="c1">
-          <h2>Race Results</h2>
-          <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Round</th>
-                <th>Circuit</th>
-                <th>Position</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            </table>
-            <div class="scrollable-tbody">
+          <div class="c1">
+            <h2>Race Results</h2>
+            <div class="table-container">
               <table>
-            <tbody id="driver-race-results">
-              <!-- Results will be dynamically populated here -->
-            </tbody>
-          </table>
-        </div>
-        </div>
-        </div>
+                <thead>
+                  <tr>
+                    <th>Round</th>
+                    <th>Circuit</th>
+                    <th>Position</th>
+                    <th>Points</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scrollable-tbody">
+                <table>
+                  <tbody id="driver-race-results">
+                    <!-- Results will be dynamically populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-        <div class="c2">
-          <h1 id="driver-name"></h1>
-          <p><strong>Driver Number:</strong> <span id="driver-number"></span></p>
-          <p><strong>Code:</strong> <span id="driver-code"></span></p>
-          <p>
-            <strong>Nationality:</strong> <span id="driver-nationality"></span>
-          </p>
-          <p><strong>Date of Birth:</strong> <span id="driver-dob"></span></p>
-          <p>
-            <strong>URL:</strong>
-            <a id="driver-url" href="#" target="_blank"></a>
-          </p>
-      </div>
-      </div>
-      <div class="dialog-footer">
-        <button id="close-driver-dialog" class="browse-button">
-          Close
-        </button>
-      </div>
+          <div class="c2">
+            <h1 id="driver-name"></h1>
+            <p>
+              <strong>Driver Number:</strong> <span id="driver-number"></span>
+            </p>
+            <p><strong>Code:</strong> <span id="driver-code"></span></p>
+            <p>
+              <strong>Nationality:</strong>
+              <span id="driver-nationality"></span>
+            </p>
+            <p><strong>Date of Birth:</strong> <span id="driver-dob"></span></p>
+            <p>
+              <strong>URL:</strong>
+              <a id="driver-url" href="#" target="_blank"></a>
+            </p>
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button id="close-driver-dialog" class="browse-button">Close</button>
+        </div>
       </dialog>
 
       <!-- Constructor View -->
