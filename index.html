@@ -158,13 +158,30 @@
 
       <!-- Circuit View -->
       <dialog id="circuit">
-        <header>
-          <img style="max-height: 40px; margin: 10px" src="images/F1.svg.png" />
-          <h1 class="headerTitle">F1 Dashboard Project</h1>
-        </header>
-        <h2>Circuit Details</h2>
-        <button id="close-circuit-dialog">Close</button>
-        <div id="circuit-container"></div>
+        <div class="driver-content">
+          <div class="c1">
+            <h2>Circuit Image</h2>
+            <img />
+          </div>
+
+          <div class="c2">
+            <h1 id="circuit-name-big"></h1>
+            <p><strong>Country:</strong> <span id="circuit-country"></span></p>
+            <p>
+              <strong>Location:</strong> <span id="circuit-location"></span>
+            </p>
+            <p>
+              <strong>URL:</strong>
+              <a id="circuit-url" href="#" target="_blank"
+                >View Circuit Details</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <button id="close-circuit-dialog" class="browse-button">Close</button>
+        </div>
       </dialog>
 
       <!-- Driver View -->

@@ -144,9 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const c3 = document.querySelector(".c3-races");
 
     // below makes sure that opening race page the placeholder is visible and not the races
-    placeholder.style.display = "block"; 
+    placeholder.style.display = "block";
     c2.style.display = "none";
-    c3.style.display = "none";  
+    c3.style.display = "none";
 
     // Sort races by round https://forum.freecodecamp.org/t/arr-sort-a-b-a-b-explanation/167677
     races.sort((a, b) => a.round - b.round);
@@ -159,7 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
       round.textContent = race.round;
 
       const name = document.createElement("td");
-      name.textContent = race.name;
+      const circuitLink = document.createElement("a");
+      circuitLink.textContent = race.circuit.name;
+      circuitLink.href = "#";
+      circuitLink.addEventListener("click", (event) => {
+        openCircuitDialog(race.circuit.id);
+      });
+      name.appendChild(circuitLink);
 
       const action = document.createElement("td");
       const resultsButton = document.createElement("button");
@@ -420,6 +426,50 @@ document.addEventListener("DOMContentLoaded", () => {
   tableSorting("qualifying-body", "qualifying-results");
   tableSorting("race-body", "race-results");
 
+  // ********* Circuit Dialog Code **********//
+  async function openCircuitDialog(circuitId) {
+    try {
+      // Fetch circuit data using the ID passed in
+      const circuitURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/circuits.php?id=${circuitId}`;
+      const circuitData = await fetchCircuitData(circuitURL);
+
+      // Call helper function to populate dialog
+      populateCircuitDetails(circuitData);
+
+      const circuitDialog = document.getElementById("circuit");
+      circuitDialog.showModal();
+
+      document
+        .getElementById("close-circuit-dialog")
+        .addEventListener("click", () => {
+          circuitDialog.close();
+        });
+    } catch (error) {
+      console.error("Error with dialog:", error);
+      alert("There was an issue with the dialog, please try later.");
+    }
+  }
+
+  // Fetch circuit data
+  async function fetchCircuitData(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  }
+
+  // Function to populate circuit details into the dialog
+  function populateCircuitDetails(circuit) {
+    document.getElementById("circuit-name-big").textContent = circuit.name;
+    document.getElementById("circuit-country").textContent = circuit.country;
+    document.getElementById("circuit-location").textContent = circuit.location;
+    document.getElementById("circuit-url").href = circuit.url;
+    document.getElementById("circuit-url").textContent = "View Circuit Details";
+
+    // Setup image later
+  }
+
   //********** Constructor Dialog Code **********//
 
   // Function for displaying constructor dialog from pressing on constructor button
@@ -470,7 +520,8 @@ document.addEventListener("DOMContentLoaded", () => {
           constructorDialog.close();
         });
     } catch (error) {
-      console.error("Error closing constructor dialog:", error);
+      console.error("Error with dialog:", error);
+      alert("There was an issue with the dialog, please try later.");
     }
   }
 
@@ -571,7 +622,8 @@ document.addEventListener("DOMContentLoaded", () => {
           driverDialog.close();
         });
     } catch (error) {
-      console.error("Error opening driver dialog:", error);
+      console.error("Error with dialog:", error);
+      alert("There was an issue with the dialog, please try later.");
     }
   }
 

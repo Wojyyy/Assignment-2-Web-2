@@ -331,7 +331,7 @@ tr td {
     width: 100%;
 }
 
-#close-constructor-dialog, #close-driver-dialog {
+#close-constructor-dialog, #close-driver-dialog, #close-circuit-dialog {
     justify-content: center;
     width: 100%;
 }
