@@ -63,7 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Async function to fetch all season data (lecture)
   async function getSeasonData(season) {
+    const spinner = document.querySelector(".lds-dual-ring"); // loading wheel
+
     try {
+      // Show loading wheel
+      spinner.style.display = "block";
+
       const raceURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/races.php?season=${season}`;
       const resultsURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/results.php?season=${season}`;
       const qualifyingURL = `https://www.randyconnolly.com/funwebdev/3rd/api/f1/qualifying.php?season=${season}`;
@@ -128,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Error display for user
       alert("Failed to load season data. Please try again later.");
     }
+    spinner.style.display = "none"; // Hide loading wheel
   }
 
   // Function to display races data in the dialog
