@@ -394,15 +394,15 @@ document.addEventListener("DOMContentLoaded", () => {
   function tableSorting(theadId, tbodyId) {
     const thead = document.getElementById(theadId);
     const tbody = document.getElementById(tbodyId);
-  
+
     // make sure that the head and body are there
     if (!thead || !tbody) {
       console.error(`Table head or body not found: ${theadId}, ${tbodyId}`);
       return;
     }
-  
+
     const headers = thead.querySelectorAll("th");
-  
+
     // https://www.w3schools.com/howto/howto_js_sort_table.asp
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
     // https://www.codewithfaraz.com/content/22/how-to-sort-html-table-by-header-click-sorting-data-tables
@@ -413,22 +413,22 @@ document.addEventListener("DOMContentLoaded", () => {
         sortIndicator.style.marginLeft = "5px";
         header.appendChild(sortIndicator);
       }
-  
+
       header.addEventListener("click", () => {
         const rows = Array.from(tbody.querySelectorAll("tr"));
         const sortIndicator = header.querySelector(".sort-indicator");
-  
+
         thead.querySelectorAll(".sort-indicator").forEach((span) => {
           span.textContent = "";
         });
-  
+
         const ascending = header.dataset.sortOrder !== "asc";
         header.dataset.sortOrder = ascending ? "asc" : "desc";
-  
+
         rows.sort((rowA, rowB) => {
           const cellA = rowA.children[index].textContent.trim();
           const cellB = rowB.children[index].textContent.trim();
-  
+
           // check if theyre numbers first
           if (!isNaN(cellA) && !isNaN(cellB)) {
             return ascending ? cellA - cellB : cellB - cellA;
@@ -438,15 +438,15 @@ document.addEventListener("DOMContentLoaded", () => {
               : cellB.localeCompare(cellA);
           }
         });
-  
+
         // https://www.w3schools.com/charsets/ref_utf_arrows.asp
         sortIndicator.textContent = ascending ? "▲" : "▼";
-  
+
         rows.forEach((row) => tbody.appendChild(row));
       });
     });
   }
-  
+
   // Call function to sort c2 or c3
   tableSorting("qualifying-body", "qualifying-results");
   tableSorting("race-body", "race-results");
@@ -491,6 +491,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("circuit-location").textContent = circuit.location;
     document.getElementById("circuit-url").href = circuit.url;
     document.getElementById("circuit-url").textContent = "View Circuit Details";
+
+    document.getElementById(
+      "circuit-image"
+    ).src = `https://placehold.co/300x200?text=${circuit.name}`;
 
     // Setup image later
   }
@@ -679,7 +683,9 @@ document.addEventListener("DOMContentLoaded", () => {
       matchingDriver.nationality;
     document.getElementById("driver-dob").textContent = matchingDriver.dob;
     document.getElementById("driver-url").href = matchingDriver.url;
-    document.getElementById("driver-url").textContent = matchingDriver.url;
+    document.getElementById(
+      "driver-image"
+    ).src = `https://placehold.co/300x200?text=${matchingDriver.forename}+${matchingDriver.surname}`;
   }
 
   // Function to populate driver race results from this season in table in the dialog
