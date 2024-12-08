@@ -166,9 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const name = document.createElement("td");
       const circuitLink = document.createElement("a");
-      circuitLink.textContent = race.circuit.name;
+      if (isFavourite("favouriteCircuits", race.circuit.id)) {
+        circuitLink.textContent = `⭐ ${race.circuit.name}`;
+      } else {
+        circuitLink.textContent = race.circuit.name;
+      }
       circuitLink.href = "#";
-      circuitLink.addEventListener("click", (event) => {
+      circuitLink.addEventListener("click", () => {
         openCircuitDialog(race.circuit.id);
       });
       name.appendChild(circuitLink);
@@ -259,20 +263,29 @@ document.addEventListener("DOMContentLoaded", () => {
       // Populate driver and constructor results
       const driver = document.createElement("td");
       const driverLink = document.createElement("a");
-      driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      // Check if the driver is favourite and conditionally add a star
+      if (isFavourite("favouriteDrivers", result.driver.id)) {
+        driverLink.textContent = `⭐ ${result.driver.forename} ${result.driver.surname}`;
+      } else {
+        driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      }
       // Setup as a button that opens driver dialog for this specific driver
       driverLink.href = "#";
-      driverLink.addEventListener("click", (event) => {
+      driverLink.addEventListener("click", () => {
         openDriverDialog(result.driver); // Pass the driver object so we can display it in the drivers dialog
       });
       driver.appendChild(driverLink);
 
       const constructor = document.createElement("td");
       const constructorLink = document.createElement("a");
-      constructorLink.textContent = result.constructor.name;
+      if (isFavourite("favouriteConstructors", result.constructor.id)) {
+        constructorLink.textContent = `⭐ ${result.constructor.name}`;
+      } else {
+        constructorLink.textContent = result.constructor.name;
+      }
       // Setup as a button that opens constructor dialog for this specific constructor
       constructorLink.href = "#";
-      constructorLink.addEventListener("click", (event) => {
+      constructorLink.addEventListener("click", () => {
         openConstructorDialog(result.constructor); // Pass the constructor object so we can diplay it in the constructors dialog
       });
       constructor.appendChild(constructorLink);
@@ -333,10 +346,14 @@ document.addEventListener("DOMContentLoaded", () => {
         title.textContent = "Third:";
       }
 
-      driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      // Check if the driver is favourite and conditionally add a star
+      if (isFavourite("favouriteDrivers", result.driver.id)) {
+        driverLink.textContent = `⭐ ${result.driver.forename} ${result.driver.surname}`;
+      } else {
+        driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      }
       driverLink.href = "#";
-      driverLink.addEventListener("click", (event) => {
-        event.preventDefault();
+      driverLink.addEventListener("click", () => {
         openDriverDialog(result.driver);
       });
 
@@ -356,20 +373,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const driver = document.createElement("td");
       const driverLink = document.createElement("a");
-      driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      // Check if the driver is favourite and conditionally add a star
+      if (isFavourite("favouriteDrivers", result.driver.id)) {
+        driverLink.textContent = `⭐ ${result.driver.forename} ${result.driver.surname}`;
+      } else {
+        driverLink.textContent = `${result.driver.forename} ${result.driver.surname}`;
+      }
       // Setup as a button that opens driver dialog for this specific driver
       driverLink.href = "#";
-      driverLink.addEventListener("click", (event) => {
+      driverLink.addEventListener("click", () => {
         openDriverDialog(result.driver); // Pass the driver object so we can diplay it in the drivers dialog
       });
       driver.appendChild(driverLink);
 
       const constructor = document.createElement("td");
       const constructorLink = document.createElement("a");
-      constructorLink.textContent = result.constructor.name;
+      if (isFavourite("favouriteConstructors", result.constructor.id)) {
+        constructorLink.textContent = `⭐ ${result.constructor.name}`;
+      } else {
+        constructorLink.textContent = result.constructor.name;
+      }
       // Setup as a button that opens constructor dialog for this specific constructor
       constructorLink.href = "#";
-      constructorLink.addEventListener("click", (event) => {
+      constructorLink.addEventListener("click", () => {
         openConstructorDialog(result.constructor); // Pass the driver object so we can diplay it in the drivers dialog
       });
       constructor.appendChild(constructorLink);
@@ -464,6 +490,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const circuitDialog = document.getElementById("circuit");
       circuitDialog.showModal();
 
+      // favourite    
+      const favouriteButton = document.getElementById("favourite-circuit");
+
+      if (isFavourite("favouriteCircuits", circuitId)) {
+        favouriteButton.textContent = "Unfavourite";
+      } else {
+        favouriteButton.textContent = "Favourite";
+      }
+
+      favouriteButton.onclick = () => {
+        toggleFavourite("favouriteCircuits", circuitId, favouriteButton);
+      };
+
       document
         .getElementById("close-circuit-dialog")
         .addEventListener("click", () => {
@@ -541,6 +580,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const constructorDialog = document.getElementById("constructor");
       constructorDialog.showModal();
+
+      // Favourite
+      const favouriteButton = document.getElementById("favourite-constructor");
+
+      if (isFavourite("favouriteConstructors", constructor.id)) {
+        favouriteButton.textContent = "Unfavourite";
+      } else {
+        favouriteButton.textContent = "Favourite";
+      }
+      
+      favouriteButton.onclick = () => {
+        toggleFavourite(
+          "favouriteConstructors",
+          constructor.id,
+          favouriteButton
+        );
+      };
 
       // Constructors dialog close button
       document
@@ -645,6 +701,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const driverDialog = document.getElementById("driver");
       driverDialog.showModal();
 
+      // Favourite
+      const favouriteButton = document.getElementById("favourite-driver");
+
+      if (isFavourite("favouriteDrivers", driver.id)) {
+        favouriteButton.textContent = "Unfavourite";
+      } else {
+        favouriteButton.textContent = "Favourite";
+      }
+    
+      favouriteButton.onclick = () => {
+        toggleFavourite("favouriteDrivers", driver.id, favouriteButton);
+      };
+
       document
         .getElementById("close-driver-dialog")
         .addEventListener("click", () => {
@@ -727,5 +796,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
       raceResultsTable.appendChild(row);
     });
+  }
+
+  /**** Favourites Functions ****/
+
+  // Function to get favourites from localStorage
+  function getFavourites(key) {
+    return JSON.parse(localStorage.getItem(key)) || [];
+  }
+
+  // Function to save favourites on localStorage
+  function saveFavourites(key, items) {
+    localStorage.setItem(key, JSON.stringify(items));
+  }
+
+  // Function to check if an item is already in favourites
+  function isFavourite(key, id) {
+    const favourites = getFavourites(key).map(String); 
+    return favourites.includes(String(id));
+  }
+
+  // Function to toggle favourite status and change button text
+  function toggleFavourite(key, itemId, button) {
+    let favourites = getFavourites(key).map(String); 
+    itemId = String(itemId);
+
+    // remove or add to favourites
+    if (favourites.includes(itemId)) {
+      favourites = favourites.filter((id) => id !== itemId);
+      button.textContent = "Favourite";
+    } else {
+      favourites.push(itemId);
+      button.textContent = "Unfavourite";
+    }
+
+    saveFavourites(key, favourites);
   }
 });
