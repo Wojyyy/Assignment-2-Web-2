@@ -1,4 +1,4 @@
-# **COMP 3512 - F1 Dashboard Project**
+# **COMP 3512 - F1 Dashboard Project #2**
 
 ## **Overview**
 This repository contains the code for **COMP 3512 Assignment 2** at Mount Royal University. The goal of this project is to develop a data driven Formula 1 dashboard using **HTML**, **CSS**, and **JavaScript**. The project retrieves and displays data from Formula 1 races, including results, driver information, constructors, and circuits.
