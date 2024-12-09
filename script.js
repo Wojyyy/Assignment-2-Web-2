@@ -163,19 +163,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const round = document.createElement("td");
       round.textContent = race.round;
-
       const name = document.createElement("td");
-      const circuitLink = document.createElement("a");
+      const raceLink = document.createElement("a");
+
       if (isFavourite("favouriteCircuits", race.circuit.id)) {
-        circuitLink.textContent = `⭐ ${race.circuit.name}`;
+        raceLink.textContent = `⭐ ${race.name}`;
       } else {
-        circuitLink.textContent = race.circuit.name;
+        raceLink.textContent = race.name; // Display race name
       }
-      circuitLink.href = "#";
-      circuitLink.addEventListener("click", () => {
+
+      raceLink.href = "#";
+      raceLink.addEventListener("click", () => {
         openCircuitDialog(race.circuit.id);
       });
-      name.appendChild(circuitLink);
+      name.appendChild(raceLink);
 
       const action = document.createElement("td");
       const resultsButton = document.createElement("button");
@@ -490,7 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const circuitDialog = document.getElementById("circuit");
       circuitDialog.showModal();
 
-      // favourite    
+      // favourite
       const favouriteButton = document.getElementById("favourite-circuit");
 
       if (isFavourite("favouriteCircuits", circuitId)) {
@@ -589,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         favouriteButton.textContent = "Favourite";
       }
-      
+
       favouriteButton.onclick = () => {
         toggleFavourite(
           "favouriteConstructors",
@@ -709,7 +710,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         favouriteButton.textContent = "Favourite";
       }
-    
+
       favouriteButton.onclick = () => {
         toggleFavourite("favouriteDrivers", driver.id, favouriteButton);
       };
@@ -812,13 +813,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to check if an item is already in favourites
   function isFavourite(key, id) {
-    const favourites = getFavourites(key).map(String); 
+    const favourites = getFavourites(key).map(String);
     return favourites.includes(String(id));
   }
 
   // Function to toggle favourite status and change button text
   function toggleFavourite(key, itemId, button) {
-    let favourites = getFavourites(key).map(String); 
+    let favourites = getFavourites(key).map(String);
     itemId = String(itemId);
 
     // remove or add to favourites
