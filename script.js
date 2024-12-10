@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Dialogs
-  const racesDialog = document.getElementById("races");
-  const homePage = document.getElementById("home");
+  const racesDialog = document.querySelector("#races");
+  const homePage = document.querySelector("#home");
 
   // Buttons
-  const viewRacesButton = document.getElementById("view-races-button");
-  const logo = document.getElementById("logo");
+  const viewRacesButton = document.querySelector("#view-races-button");
+  const logo = document.querySelector("#logo");
 
   // Selects
-  const seasonSelect = document.getElementById("season-select");
+  const seasonSelect = document.querySelector("#season-select");
 
   // Populate each option with these four year options
   const years = [2020, 2021, 2022, 2023];
@@ -139,13 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to display races data in the dialog
   function displayRaces(races, season) {
     // Update Heading with the correct year
-    const seasonYearHeading = document.getElementById("season-year");
+    const seasonYearHeading = document.querySelector("#season-year");
     seasonYearHeading.textContent = `${season} Races`;
 
-    const racesContainer = document.getElementById("races-container");
+    const racesContainer = document.querySelector("#races-container");
     racesContainer.innerHTML = ""; // Clear previous rows
 
-    const placeholder = document.getElementById("placeholder");
+    const placeholder = document.querySelector("#placeholder");
     const c2 = document.querySelector(".c2-races");
     const c3 = document.querySelector(".c3-races");
 
@@ -202,8 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Display the dialog
-    const racesDialog = document.getElementById("races");
-    const homePage = document.getElementById("home");
+    const racesDialog = document.querySelector("#races");
+    const homePage = document.querySelector("#home");
     racesDialog.style.display = "block";
     homePage.style.display = "none";
   }
@@ -241,18 +241,18 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     // Populate race details sections in c2
-    document.getElementById("race-name").textContent = race.name;
-    document.getElementById("race-round").textContent = race.round;
-    document.getElementById("circuit-name").textContent = race.circuit.name;
-    document.getElementById("race-location").textContent =
+    document.querySelector("#race-name").textContent = race.name;
+    document.querySelector("#race-round").textContent = race.round;
+    document.querySelector("#circuit-name").textContent = race.circuit.name;
+    document.querySelector("#race-location").textContent =
       race.circuit.location;
-    document.getElementById("race-country").textContent = race.circuit.country;
-    document.getElementById("race-date").textContent = race.date;
-    document.getElementById("race-url").href = race.url;
+    document.querySelector("#race-country").textContent = race.circuit.country;
+    document.querySelector("#race-date").textContent = race.date;
+    document.querySelector("#race-url").href = race.url;
 
     // Populate qualifying results in c2
     const qualifyingResultsTable =
-      document.getElementById("qualifying-results");
+      document.querySelector("#qualifying-results");
     qualifyingResultsTable.innerHTML = ""; // Clear previous results
 
     raceQualifyingResults.forEach((result) => {
@@ -316,8 +316,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // C3 function
   function populateRaceResults(raceResults) {
-    const podiumDiv = document.getElementById("podium");
-    const raceResultsTable = document.getElementById("race-results");
+    const podiumDiv = document.querySelector("#podium");
+    const raceResultsTable = document.querySelector("#race-results");
 
     // Clear previous results
     podiumDiv.innerHTML = "";
@@ -419,8 +419,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Sorting c2 and c3 content
   function tableSorting(theadId, tbodyId) {
-    const thead = document.getElementById(theadId);
-    const tbody = document.getElementById(tbodyId);
+    const thead = document.querySelector(theadId);
+    const tbody = document.querySelector(tbodyId);
 
     // make sure that the head and body are there
     if (!thead || !tbody) {
@@ -475,8 +475,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Call function to sort c2 or c3
-  tableSorting("qualifying-body", "qualifying-results");
-  tableSorting("race-body", "race-results");
+  tableSorting("#qualifying-body", "#qualifying-results");
+  tableSorting("#race-body", "#race-results");
 
   // ********* Circuit Dialog Code **********//
   async function openCircuitDialog(circuitId) {
@@ -488,11 +488,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Call helper function to populate dialog
       populateCircuitDetails(circuitData);
 
-      const circuitDialog = document.getElementById("circuit");
+      const circuitDialog = document.querySelector("#circuit");
       circuitDialog.showModal();
 
       // favourite
-      const favouriteButton = document.getElementById("favourite-circuit");
+      const favouriteButton = document.querySelector("#favourite-circuit");
 
       if (isFavourite("favouriteCircuits", circuitId)) {
         favouriteButton.textContent = "Unfavourite";
@@ -505,7 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       document
-        .getElementById("close-circuit-dialog")
+        .querySelector("#close-circuit-dialog")
         .addEventListener("click", () => {
           circuitDialog.close();
         });
@@ -526,14 +526,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to populate circuit details into the dialog
   function populateCircuitDetails(circuit) {
-    document.getElementById("circuit-name-big").textContent = circuit.name;
-    document.getElementById("circuit-country").textContent = circuit.country;
-    document.getElementById("circuit-location").textContent = circuit.location;
-    document.getElementById("circuit-url").href = circuit.url;
-    document.getElementById("circuit-url").textContent = "View Circuit Details";
+    document.querySelector("#circuit-name-big").textContent = circuit.name;
+    document.querySelector("#circuit-country").textContent = circuit.country;
+    document.querySelector("#circuit-location").textContent = circuit.location;
+    document.querySelector("#circuit-url").href = circuit.url;
+    document.querySelector("#circuit-url").textContent = "View Circuit Details";
 
-    document.getElementById(
-      "circuit-image"
+    document.querySelector(
+      "#circuit-image"
     ).src = `https://placehold.co/300x200?text=${circuit.name}`;
 
     // Setup image later
@@ -579,11 +579,11 @@ document.addEventListener("DOMContentLoaded", () => {
       populateConstructorDetails(constructor, totalPoints);
       populateRaceResultsTable(constructorResults, seasonResults);
 
-      const constructorDialog = document.getElementById("constructor");
+      const constructorDialog = document.querySelector("#constructor");
       constructorDialog.showModal();
 
       // Favourite
-      const favouriteButton = document.getElementById("favourite-constructor");
+      const favouriteButton = document.querySelector("#favourite-constructor");
 
       if (isFavourite("favouriteConstructors", constructor.id)) {
         favouriteButton.textContent = "Unfavourite";
@@ -601,7 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Constructors dialog close button
       document
-        .getElementById("close-constructor-dialog")
+        .querySelector("#close-constructor-dialog")
         .addEventListener("click", () => {
           constructorDialog.close();
         });
@@ -622,21 +622,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Populate constructor details in the dialog
   function populateConstructorDetails(constructor, totalPoints) {
-    document.getElementById("constructor-name").textContent = constructor.name;
-    document.getElementById("constructor-nationality").textContent =
+    document.querySelector("#constructor-name").textContent = constructor.name;
+    document.querySelector("#constructor-nationality").textContent =
       constructor.nationality;
-    document.getElementById(
-      "constructor-url"
+    document.querySelector(
+      "#constructor-url"
     ).href = `https://en.wikipedia.org/wiki/${constructor.name}`;
-    document.getElementById("constructor-url").textContent = constructor.name;
-    document.getElementById("constructor-total-points").textContent =
+    document.querySelector("#constructor-url").textContent = constructor.name;
+    document.querySelector("#constructor-total-points").textContent =
       totalPoints;
   }
 
   // Populate race results table in the dialog
   function populateRaceResultsTable(constructorResults, seasonResults) {
-    const raceResultsTable = document.getElementById(
-      "constructor-race-results"
+    const raceResultsTable = document.querySelector(
+      "#constructor-race-results"
     );
     raceResultsTable.innerHTML = "";
 
@@ -699,11 +699,11 @@ document.addEventListener("DOMContentLoaded", () => {
       populateDriverDetails(driver);
       populateDriverRaceResultsTable(driverResults, seasonResults);
 
-      const driverDialog = document.getElementById("driver");
+      const driverDialog = document.querySelector("#driver");
       driverDialog.showModal();
 
       // Favourite
-      const favouriteButton = document.getElementById("favourite-driver");
+      const favouriteButton = document.querySelector("#favourite-driver");
 
       if (isFavourite("favouriteDrivers", driver.id)) {
         favouriteButton.textContent = "Unfavourite";
@@ -716,7 +716,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       document
-        .getElementById("close-driver-dialog")
+        .querySelector("#close-driver-dialog")
         .addEventListener("click", () => {
           driverDialog.close();
         });
@@ -743,18 +743,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const matchingDriver = driversData.find((d) => d.driverRef === driver.ref); // matchi our 'driver' reference with this season all drivers to get necessary data
 
     // Populate driver details in the dialog
-    document.getElementById(
-      "driver-name"
+    document.querySelector(
+      "#driver-name"
     ).textContent = `${matchingDriver.forename} ${matchingDriver.surname}`;
-    document.getElementById("driver-number").textContent =
+    document.querySelector("#driver-number").textContent =
       matchingDriver.number;
-    document.getElementById("driver-code").textContent = matchingDriver.code;
-    document.getElementById("driver-nationality").textContent =
+    document.querySelector("#driver-code").textContent = matchingDriver.code;
+    document.querySelector("#driver-nationality").textContent =
       matchingDriver.nationality;
-    document.getElementById("driver-dob").textContent = matchingDriver.dob;
-    document.getElementById("driver-url").href = matchingDriver.url;
-    document.getElementById(
-      "driver-image"
+    document.querySelector("#driver-dob").textContent = matchingDriver.dob;
+    document.querySelector("#driver-url").href = matchingDriver.url;
+    document.querySelector(
+      "#driver-image"
     ).src = `https://placehold.co/300x200?text=${matchingDriver.forename}+${matchingDriver.surname}`;
   }
 
@@ -763,7 +763,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const season = seasonSelect.value;
     const racesData = JSON.parse(localStorage.getItem(`races_${season}`));
 
-    const raceResultsTable = document.getElementById("driver-race-results");
+    const raceResultsTable = document.querySelector("#driver-race-results");
     raceResultsTable.innerHTML = "";
 
     // compare results to get position and points data
